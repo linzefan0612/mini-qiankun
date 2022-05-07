@@ -3,7 +3,9 @@ import App from "./App.vue";
 
 Vue.config.productionTip = false;
 
-if (!window._IS_SUB_APP) {
+let instance = null;
+
+if (!window.__POWERED_BY_QIANKUN__) {
   mount({});
 }
 /**
@@ -20,7 +22,7 @@ export async function bootstrap() {
 export async function mount(props) {
   const { container } = props;
 
-  new Vue({
+  instance = new Vue({
     render: (h) => h(App),
   }).$mount(container ? container.querySelector("#app-container") : "#app");
 }
@@ -28,4 +30,8 @@ export async function mount(props) {
 /**
  * 应用每次 切出/卸载 会调用的方法，通常在这里我们会卸载微应用的应用实例
  */
-export async function unmount() {}
+export async function unmount() {
+  instance.$destroy();
+  instance.$el.innerHTML = "";
+  instance = null;
+}

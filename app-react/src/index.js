@@ -1,7 +1,7 @@
 /*
  * @Author: Lin ZeFan
  * @Date: 2022-05-01 16:40:06
- * @LastEditTime: 2022-05-04 12:39:00
+ * @LastEditTime: 2022-05-07 14:16:25
  * @LastEditors: Lin ZeFan
  * @Description:
  * @FilePath: \mini-qiankun\app-react\src\index.js
@@ -14,7 +14,7 @@ import App from "./App";
 
 const root = document.getElementById("root");
 
-if (!window._IS_SUB_APP) {
+if (!window.__POWERED_BY_QIANKUN__) {
   mount({});
 }
 /**
