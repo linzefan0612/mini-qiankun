@@ -1,7 +1,7 @@
 /*
  * @Author: Lin ZeFan
  * @Date: 2022-05-02 13:32:34
- * @LastEditTime: 2022-05-08 11:44:15
+ * @LastEditTime: 2022-05-08 14:35:58
  * @LastEditors: Lin ZeFan
  * @Description: 监视路由
  * @FilePath: \mini-qiankun\main\src\micro-fe\rewriteRouter.js
@@ -21,6 +21,8 @@ export const getNextApp = () => nextApp;
 export default () => {
   // 前进后退
   window.addEventListener("popstate", () => {
+    prevApp = nextApp;
+    nextApp = window.location.pathname;
     handleRouter();
   });
 
