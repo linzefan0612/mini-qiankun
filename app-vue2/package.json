@@ -33,7 +33,10 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {},
+    "globals": {
+      "__webpack_public_path__": true
+    }
   },
   "browserslist": [
     "> 1%",

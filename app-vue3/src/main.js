@@ -1,7 +1,7 @@
 /*
  * @Author: Lin ZeFan
  * @Date: 2022-05-01 17:45:05
- * @LastEditTime: 2022-05-08 12:16:29
+ * @LastEditTime: 2022-05-08 14:53:16
  * @LastEditors: Lin ZeFan
  * @Description:
  * @FilePath: \mini-qiankun\app-vue3\src\main.js
@@ -9,6 +9,7 @@
  */
 import { createApp } from "vue";
 import App from "./App.vue";
+import "./public-path";
 
 let instance = null;
 

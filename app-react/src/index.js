@@ -1,7 +1,7 @@
 /*
  * @Author: Lin ZeFan
  * @Date: 2022-05-01 16:40:06
- * @LastEditTime: 2022-05-08 11:32:56
+ * @LastEditTime: 2022-05-08 14:48:33
  * @LastEditors: Lin ZeFan
  * @Description:
  * @FilePath: \mini-qiankun\app-react\src\index.js
@@ -11,6 +11,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import './public-path';
 
 const root = document.getElementById("root");
 

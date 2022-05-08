@@ -1,18 +1,9 @@
 /*
  * @Author: Lin ZeFan
  * @Date: 2022-05-07 12:14:08
- * @LastEditTime: 2022-05-07 20:12:34
+ * @LastEditTime: 2022-05-08 15:56:31
  * @LastEditors: Lin ZeFan
  * @Description:
- * @FilePath: \mini-qiankun\main\src\micro-fe\importHtmlEntry.js
- *
- */
-/*
- * @Author: Lin ZeFan
- * @Date: 2022-05-07 12:14:08
- * @LastEditTime: 2022-05-07 13:12:01
- * @LastEditors: Lin ZeFan
- * @Description: 提取html内容
  * @FilePath: \mini-qiankun\main\src\micro-fe\importHtmlEntry.js
  *
  */
@@ -20,9 +11,9 @@ import fetchResource from "./fetchResource";
 
 export default async (url) => {
   const html = await fetchResource(url);
+
   let template = document.createElement("div");
   template.innerHTML = html;
-  // const template = html;
 
   // 获取script标签
   function getExternalScripts() {

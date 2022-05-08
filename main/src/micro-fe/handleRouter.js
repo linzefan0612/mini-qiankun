@@ -1,13 +1,13 @@
 /*
  * @Author: Lin ZeFan
  * @Date: 2022-05-04 11:19:58
- * @LastEditTime: 2022-05-08 14:28:33
+ * @LastEditTime: 2022-05-08 15:55:57
  * @LastEditors: Lin ZeFan
  * @Description: 匹配路由
  * @FilePath: \mini-qiankun\main\src\micro-fe\handleRouter.js
  *
  */
-import { getApps } from "./index";
+import { getApps, getOptions } from "./index";
 import { getPrevApp, getNextApp } from "./rewriteRouter";
 import importHtmlEntry from "./importHtmlEntry";
 
@@ -33,9 +33,17 @@ function matchRouter(path) {
 // 子应用html添加到主应用对应容器
 function createContainer(route, template) {
   if (route.container) {
+    // const options = getOptions();
     const container = querySelectorContainer(route.container);
+
+    // TODO，沙箱
+    // if (options.sandbox.strictStyleIsolation) {
+    //   let shadow = container.attachShadow({ mode: "open" });
+    //   shadow.innerHTML = template;
+    //   console.log("shadow", shadow);
+    //   console.log("template", template);
+    // }
     container.appendChild(template);
-    return container;
   }
 }
 
@@ -65,10 +73,12 @@ async function render(path) {
   if (route.entry) {
     const { template, execScripts } = await importHtmlEntry(route.entry);
 
+    // qiankun全局变量，用于资源引入、qiankun环境判断
+    window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ = route.entry;
+    window.__POWERED_BY_QIANKUN__ = true;
+
     // 将子应用append到对应容器里
     createContainer(route, template);
-
-    window.__POWERED_BY_QIANKUN__ = true;
 
     // 请求子应用资源
     const app = await execScripts();

@@ -1,7 +1,7 @@
 /*
  * @Author: Lin ZeFan
  * @Date: 2022-05-01 17:53:56
- * @LastEditTime: 2022-05-08 11:42:04
+ * @LastEditTime: 2022-05-08 15:00:41
  * @LastEditors: Lin ZeFan
  * @Description:
  * @FilePath: \mini-qiankun\app-vue2\src\main.js
@@ -9,6 +9,7 @@
  */
 import Vue from "vue";
 import App from "./App.vue";
+import "./public-path";
 
 Vue.config.productionTip = false;
 
