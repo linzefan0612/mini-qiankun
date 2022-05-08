@@ -1,7 +1,7 @@
 /*
  * @Author: Lin ZeFan
  * @Date: 2022-05-07 12:14:08
- * @LastEditTime: 2022-05-07 14:43:57
+ * @LastEditTime: 2022-05-07 20:12:34
  * @LastEditors: Lin ZeFan
  * @Description:
  * @FilePath: \mini-qiankun\main\src\micro-fe\importHtmlEntry.js
@@ -22,6 +22,7 @@ export default async (url) => {
   const html = await fetchResource(url);
   let template = document.createElement("div");
   template.innerHTML = html;
+  // const template = html;
 
   // 获取script标签
   function getExternalScripts() {
@@ -45,12 +46,13 @@ export default async (url) => {
     const scripts = await getExternalScripts();
 
     // 手动构建 CommonJs 环境
-    // 打包的时候，会引入 入口文件暴露的函数
+    // 打包的时候，会把应用 入口文件 暴露的函数加到 module.exports
+    // 最后赋值给 module.exports
     const module = { exports: {} };
     const exports = module.exports;
 
-    scripts.forEach((script) => {
-      eval(script);
+    scripts.forEach((code) => {
+      eval(code);
     });
 
     return module.exports;

@@ -1,7 +1,7 @@
 /*
  * @Author: Lin ZeFan
  * @Date: 2022-05-01 16:40:06
- * @LastEditTime: 2022-05-07 14:16:25
+ * @LastEditTime: 2022-05-08 11:32:56
  * @LastEditors: Lin ZeFan
  * @Description:
  * @FilePath: \mini-qiankun\app-react\src\index.js
@@ -31,7 +31,7 @@ export async function bootstrap() {
 export async function mount(props) {
   ReactDOM.render(
     <App />,
-    props.container ? props.container.querySelector("#app-container") : root
+    props.container ? props.container.querySelector("#root") : root
   );
 }
 
@@ -40,6 +40,6 @@ export async function mount(props) {
  */
 export async function unmount(props) {
   ReactDOM.unmountComponentAtNode(
-    props.container ? props.container.querySelector("#app-container") : root
+    props.container ? props.container.querySelector("#root") : root
   );
 }

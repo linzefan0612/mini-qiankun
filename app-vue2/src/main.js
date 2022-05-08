@@ -1,3 +1,12 @@
+/*
+ * @Author: Lin ZeFan
+ * @Date: 2022-05-01 17:53:56
+ * @LastEditTime: 2022-05-08 11:42:04
+ * @LastEditors: Lin ZeFan
+ * @Description:
+ * @FilePath: \mini-qiankun\app-vue2\src\main.js
+ *
+ */
 import Vue from "vue";
 import App from "./App.vue";
 
@@ -13,7 +22,7 @@ if (!window.__POWERED_BY_QIANKUN__) {
  * 通常我们可以在这里做一些全局变量的初始化，比如不会在 unmount 阶段被销毁的应用级别的缓存等。
  */
 export async function bootstrap() {
-  console.log("react app bootstraped");
+  console.log("vue2 app bootstraped");
 }
 
 /**
@@ -21,17 +30,18 @@ export async function bootstrap() {
  */
 export async function mount(props) {
   const { container } = props;
-
   instance = new Vue({
     render: (h) => h(App),
-  }).$mount(container ? container.querySelector("#app-container") : "#app");
+  }).$mount(container ? container.querySelector("#app") : "#app");
 }
 
 /**
  * 应用每次 切出/卸载 会调用的方法，通常在这里我们会卸载微应用的应用实例
  */
 export async function unmount() {
-  instance.$destroy();
-  instance.$el.innerHTML = "";
-  instance = null;
+  if (instance) {
+    instance.$destroy();
+    instance.$el.innerHTML = "";
+    instance = null;
+  }
 }
