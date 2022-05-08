@@ -1,7 +1,7 @@
 /*
  * @Author: Lin ZeFan
  * @Date: 2022-05-04 11:19:58
- * @LastEditTime: 2022-05-08 12:08:56
+ * @LastEditTime: 2022-05-08 14:28:33
  * @LastEditors: Lin ZeFan
  * @Description: 匹配路由
  * @FilePath: \mini-qiankun\main\src\micro-fe\handleRouter.js
@@ -33,7 +33,6 @@ function matchRouter(path) {
 // 子应用html添加到主应用对应容器
 function createContainer(route, template) {
   if (route.container) {
-    // const container = document.querySelector(route.container);
     const container = querySelectorContainer(route.container);
     container.appendChild(template);
     return container;
@@ -47,15 +46,21 @@ function initRouteFunction(route, app) {
 }
 
 // 渲染子应用
-async function render() {
+async function render(path) {
   // 卸载上一个应用
   const prevApp = matchRouter(getPrevApp());
   if (prevApp && prevApp.entry) {
     unmount(prevApp);
   }
 
-  // 加载当前应用
-  const route = matchRouter(getNextApp());
+  let route = {};
+  if (path) {
+    // 第一次加载，截取路由
+    route = matchRouter(path);
+  } else {
+    // 加载当前应用
+    route = matchRouter(getNextApp());
+  }
 
   if (route.entry) {
     const { template, execScripts } = await importHtmlEntry(route.entry);
@@ -80,25 +85,22 @@ async function render() {
 async function bootstrap(app) {
   app.bootstrap &&
     (await app.bootstrap({
-      // container: document.querySelector(app.container),
       container: querySelectorContainer(app.container),
     }));
 }
 async function mount(app) {
   app.mount &&
     (await app.mount({
-      // container: document.querySelector(app.container),
       container: querySelectorContainer(app.container),
     }));
 }
 async function unmount(app) {
   app.unmount &&
     (await app.unmount({
-      // container: document.querySelector(app.container),
       container: querySelectorContainer(app.container),
     }));
 }
 
-export default () => {
-  render();
+export default (path) => {
+  render(path);
 };
